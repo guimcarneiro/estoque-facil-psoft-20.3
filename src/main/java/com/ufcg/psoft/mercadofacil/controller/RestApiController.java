@@ -99,6 +99,7 @@ public class RestApiController {
 		
 		currentProduto.setNome(produto.getNome());
 		currentProduto.setPreco(produto.getPreco());
+		currentProduto.setDescricao(produto.getDescricao());
 		currentProduto.setCodigoBarra(produto.getCodigoBarra());
 		currentProduto.mudaFabricante(produto.getFabricante());
 		currentProduto.mudaCategoria(produto.getCategoria());
@@ -134,7 +135,7 @@ public class RestApiController {
 		}
 		
 		Produto product = optionalProduto.get();
-		Lote lote = new Lote(product, loteDTO.getNumeroDeItens());
+		Lote lote = new Lote(product, loteDTO.getNumeroDeItens(), loteDTO.getDataDeValidade());
 		
 		loteRepository.save(lote);
 		

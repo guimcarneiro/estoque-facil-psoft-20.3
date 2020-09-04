@@ -25,6 +25,8 @@ public class Produto {
 	private String fabricante;
 
 	private String categoria;
+	
+	private String descricao;
 
 	public int situacao; // usa variaveis estaticas abaixo
 	/* situacoes do produto */
@@ -36,7 +38,7 @@ public class Produto {
 	}
 
 	public Produto(long id, String nome, String codigoBarra, String fabricante,
-			String nomeCategoria) {
+			String nomeCategoria, String descricao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -45,6 +47,7 @@ public class Produto {
 		this.fabricante = fabricante;
 		this.categoria = nomeCategoria;
 		this.situacao = Produto.INDISPONIVEL;
+		this.descricao = descricao;
 	}
 
 	public long getId() {
@@ -54,7 +57,7 @@ public class Produto {
 	public String getNome() {
 		return nome;
 	}
-
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -87,6 +90,14 @@ public class Produto {
 		return this.categoria;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
 	public void mudaCategoria(String categoria) {
 		this.categoria = categoria;
 	}
