@@ -1,4 +1,4 @@
-package com.ufcg.psoft.mercadofacil.model;
+package com.ufcg.psoft.mercadofacil.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

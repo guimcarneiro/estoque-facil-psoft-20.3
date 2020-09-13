@@ -1,4 +1,4 @@
-package com.ufcg.psoft.mercadofacil.controller;
+package com.ufcg.psoft.mercadofacil.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ufcg.psoft.mercadofacil.DTO.LoteDTO;
-import com.ufcg.psoft.mercadofacil.model.Lote;
-import com.ufcg.psoft.mercadofacil.model.Produto;
+import com.ufcg.psoft.mercadofacil.models.Lote;
+import com.ufcg.psoft.mercadofacil.models.Produto;
 import com.ufcg.psoft.mercadofacil.repositories.LoteRepository;
 import com.ufcg.psoft.mercadofacil.repositories.ProdutoRepository;
-import com.ufcg.psoft.mercadofacil.util.CustomErrorType;
+import com.ufcg.psoft.mercadofacil.services.CarrinhoDeComprasService;
+import com.ufcg.psoft.mercadofacil.services.CompraService;
+import com.ufcg.psoft.mercadofacil.utils.CustomErrorType;
 
 import exceptions.ObjetoInvalidoException;
 
@@ -34,7 +36,13 @@ public class RestApiController {
 	
 	@Autowired
 	private LoteRepository loteRepository;
-		
+	
+	@Autowired
+	private CarrinhoDeComprasService carrinhoDeComprasService;
+	
+	@Autowired
+	private CompraService compraService;
+	
 	@RequestMapping(value = "/produtos", method = RequestMethod.GET)
 	public ResponseEntity<?> listarProdutos() {
 		List<Produto> produtos = new ArrayList<>();
@@ -48,7 +56,7 @@ public class RestApiController {
 		return new ResponseEntity<List<Produto>>(produtos, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/produto/", method = RequestMethod.POST)
+	@RequestMapping(value = "/produto", method = RequestMethod.POST)
 	public ResponseEntity<?> criarProduto(@RequestBody Produto produto, UriComponentsBuilder ucBuilder) {
 
 		List<Produto> produtos = produtoRepository.findByCodigoBarra(produto.getCodigoBarra());
@@ -166,5 +174,31 @@ public class RestApiController {
 		
 		return new ResponseEntity<List<Lote>>(lotes, HttpStatus.OK);
 	}
-
+	
+	@RequestMapping(value = "/carrinho/{idProduto}", method = RequestMethod.PUT)
+	public ResponseEntity<?> adicionarAoCarrinho(@PathVariable Long idProduto){
+		return this.carrinhoDeComprasService.adicionarProduto(idProduto);
+	}
+	
+	@RequestMapping(value = "/carrinho", method = RequestMethod.GET)
+	public ResponseEntity<?> listarProdutosCarrinho() {
+		return this.carrinhoDeComprasService.listarProdutosCarrinhoDTO();
+	}
+	
+	@RequestMapping(value = "/carrinho/limpar", method = RequestMethod.PUT)
+	public ResponseEntity<?> esvaziarCarrinho() {
+		return this.carrinhoDeComprasService.esvaziarCarrinho();
+	}
+	
+	@RequestMapping(value = "/carrinho/comprar", method = RequestMethod.POST)
+	public ResponseEntity<?> finalizarCompra() {
+		ResponseEntity<?> resposta = this.compraService.finalizarCompra(
+				this.carrinhoDeComprasService.getProdutosCarrinho());
+		
+		this.carrinhoDeComprasService.esvaziarCarrinho();
+		
+		return resposta;
+		
+	}
+	
 }
