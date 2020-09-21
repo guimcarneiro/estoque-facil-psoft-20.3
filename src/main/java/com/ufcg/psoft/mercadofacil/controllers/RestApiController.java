@@ -27,7 +27,6 @@ import com.ufcg.psoft.mercadofacil.utils.CustomErrorType;
 import exceptions.ObjetoInvalidoException;
 
 @RestController
-@RequestMapping("/api")
 @CrossOrigin
 public class RestApiController {
 
@@ -36,12 +35,6 @@ public class RestApiController {
 	
 	@Autowired
 	private LoteRepository loteRepository;
-	
-	@Autowired
-	private CarrinhoDeComprasService carrinhoDeComprasService;
-	
-	@Autowired
-	private CompraService compraService;
 	
 	@RequestMapping(value = "/produtos", method = RequestMethod.GET)
 	public ResponseEntity<?> listarProdutos() {
@@ -173,32 +166,6 @@ public class RestApiController {
 		}
 		
 		return new ResponseEntity<List<Lote>>(lotes, HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/carrinho/{idProduto}", method = RequestMethod.PUT)
-	public ResponseEntity<?> adicionarAoCarrinho(@PathVariable Long idProduto){
-		return this.carrinhoDeComprasService.adicionarProduto(idProduto);
-	}
-	
-	@RequestMapping(value = "/carrinho", method = RequestMethod.GET)
-	public ResponseEntity<?> listarProdutosCarrinho() {
-		return this.carrinhoDeComprasService.listarProdutosCarrinhoDTO();
-	}
-	
-	@RequestMapping(value = "/carrinho/limpar", method = RequestMethod.PUT)
-	public ResponseEntity<?> esvaziarCarrinho() {
-		return this.carrinhoDeComprasService.esvaziarCarrinho();
-	}
-	
-	@RequestMapping(value = "/carrinho/comprar", method = RequestMethod.POST)
-	public ResponseEntity<?> finalizarCompra() {
-		ResponseEntity<?> resposta = this.compraService.finalizarCompra(
-				this.carrinhoDeComprasService.getProdutosCarrinho());
-		
-		this.carrinhoDeComprasService.esvaziarCarrinho();
-		
-		return resposta;
-		
 	}
 	
 }

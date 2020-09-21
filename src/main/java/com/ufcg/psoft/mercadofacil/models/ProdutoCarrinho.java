@@ -1,6 +1,6 @@
 package com.ufcg.psoft.mercadofacil.models;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,6 +48,10 @@ public class ProdutoCarrinho {
 
 	public void setQuantidadeProdutos(int quantidadeProdutos) {
 		this.quantidadeProdutos = quantidadeProdutos;
+	}
+	
+	public BigDecimal getSubtotal( ) {
+		return this.produto.getPreco().multiply(new BigDecimal(quantidadeProdutos));
 	}
 
 	@Override

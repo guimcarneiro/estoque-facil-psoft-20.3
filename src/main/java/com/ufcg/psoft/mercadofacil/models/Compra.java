@@ -22,13 +22,16 @@ public class Compra {
 	
 	private BigDecimal valorTotal;
 	
+	private InfoPagamento infoPagamento;
+	
 	private LocalDateTime dataCriacao;
 	
 	public Compra() {}
 
-	public Compra(List<ProdutoCarrinho> produtosCarrinho) {
+	public Compra(List<ProdutoCarrinho> produtosCarrinho, InfoPagamento infoPagamento) {
 		this.produtosCarrinho = produtosCarrinho;
 		this.valorTotal = this.somaValorProdutos(produtosCarrinho);
+		this.infoPagamento = infoPagamento;
 		this.dataCriacao = LocalDateTime.now();
 	}
 
@@ -60,13 +63,20 @@ public class Compra {
 		this.dataCriacao = dataCriacao;
 	}
 	
+	public InfoPagamento getInfoPagamento() {
+		return infoPagamento;
+	}
+
+	public void setInfoPagamento(InfoPagamento infoPagamento) {
+		this.infoPagamento = infoPagamento;
+	}
+
 	private BigDecimal somaValorProdutos(List<ProdutoCarrinho> produtosCarrinho) {
 		BigDecimal valorTotal = new BigDecimal(0);
 		
 		for (ProdutoCarrinho produtoCarrinho : produtosCarrinho) {
 			valorTotal = valorTotal.add(
-					produtoCarrinho.getProduto().getPreco())
-					.multiply(new BigDecimal(produtoCarrinho.getQuantidadeProdutos()));
+					produtoCarrinho.getSubtotal());
 		}
 		
 		return valorTotal;
