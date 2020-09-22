@@ -1,7 +1,10 @@
 package com.ufcg.psoft.mercadofacil.models;
 
+import javax.persistence.Embeddable;
+
 import com.ufcg.psoft.mercadofacil.enums.MetodoPagamento;
 
+@Embeddable
 public class InfoPagamento {
 	
 	private MetodoPagamento metodoPagamento;
