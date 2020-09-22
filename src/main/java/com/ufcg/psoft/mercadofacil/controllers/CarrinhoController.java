@@ -41,7 +41,7 @@ public class CarrinhoController {
 		return this.carrinhoDeComprasService.esvaziarCarrinho();
 	}
 	
-	@PostMapping(value = "/comprar")
+	@PostMapping(value = "/compra")
 	public ResponseEntity<?> finalizarCompra(
 			@RequestBody InfoPagamentoFinalizacaoCompraDTO infoPagamentoFinalizacaoCompraDTO) {
 		ResponseEntity<?> resposta = this.compraService.finalizarCompra(
