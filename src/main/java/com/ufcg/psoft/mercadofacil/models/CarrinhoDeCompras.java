@@ -84,6 +84,4 @@ public class CarrinhoDeCompras {
 		return "CarrinhoDeCompras [produtos=" + produtos + "]";
 	}
 	
-	
-	
 }
