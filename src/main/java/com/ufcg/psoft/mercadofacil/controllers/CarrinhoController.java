@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ufcg.psoft.mercadofacil.DTO.InfoPagamentoFinalizacaoCompraDTO;
+import com.ufcg.psoft.mercadofacil.DTO.FinalizacaoCompraDTO;
 import com.ufcg.psoft.mercadofacil.services.CarrinhoDeComprasService;
 import com.ufcg.psoft.mercadofacil.services.CompraService;
 
@@ -43,10 +43,10 @@ public class CarrinhoController {
 	
 	@PostMapping(value = "/compra")
 	public ResponseEntity<?> finalizarCompra(
-			@RequestBody InfoPagamentoFinalizacaoCompraDTO infoPagamentoFinalizacaoCompraDTO) {
+			@RequestBody FinalizacaoCompraDTO finalizacaoCompraDTO) {
 		ResponseEntity<?> resposta = this.compraService.finalizarCompra(
 				this.carrinhoDeComprasService.getProdutosCarrinho(),
-				infoPagamentoFinalizacaoCompraDTO);
+				finalizacaoCompraDTO);
 		
 		this.carrinhoDeComprasService.esvaziarCarrinho();
 		

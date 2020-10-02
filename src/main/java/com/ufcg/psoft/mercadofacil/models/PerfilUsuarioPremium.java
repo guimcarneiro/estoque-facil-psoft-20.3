@@ -11,7 +11,7 @@ public class PerfilUsuarioPremium implements InterfacePerfilUsuario{
 
 private final PerfilUsuarioEnum perfil = PerfilUsuarioEnum.PREMIUM;
 	
-	private final BigDecimal DESCONTO_USUARIO_PREMIUM = new BigDecimal(1.1);
+	private final BigDecimal DESCONTO_USUARIO_PREMIUM = new BigDecimal(0.9);
 	private final int NUMERO_DE_ITENS_MINIMO_PARA_APLICAR_DESCONTO = 5;
 	
 	@Override

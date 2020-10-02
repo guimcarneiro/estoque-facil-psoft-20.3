@@ -27,7 +27,8 @@ public class CompraMapper {
 				compra.getId(),
 				produtosCarrinhoDTO,
 				compra.getValorTotal(),
-				compra.getDataCriacao());
+				compra.getDataCriacao(),
+				compra.getUsuario().getId());
 		
 		return compraDTO;
 	}
@@ -46,7 +47,8 @@ public class CompraMapper {
 				compra.getId(),
 				produtosCarrinhoDTO,
 				compra.getValorTotal(),
-				compra.getDataCriacao());
+				compra.getDataCriacao(),
+				compra.getUsuario().getId());
 		
 		return compraHistoricoDTO;
 	}
@@ -69,6 +71,7 @@ public class CompraMapper {
 		compraDetalhesDTO.setProdutos(produtosCarrinhoDTO);
 		compraDetalhesDTO.setDataCriacao(compra.getDataCriacao());
 		compraDetalhesDTO.setValorTotal(compra.getValorTotal());
+		compraDetalhesDTO.setUsuarioId(compra.getUsuario().getId());
 		
 		return compraDetalhesDTO;
 	}

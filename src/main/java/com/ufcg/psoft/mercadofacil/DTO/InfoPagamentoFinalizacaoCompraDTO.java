@@ -15,5 +15,5 @@ public class InfoPagamentoFinalizacaoCompraDTO {
 	public void setMetodoPagamento(MetodoPagamento metodoPagamento) {
 		this.metodoPagamento = metodoPagamento;
 	}
-	
+
 }

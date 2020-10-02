@@ -1,22 +1,54 @@
 package com.ufcg.psoft.mercadofacil.models;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
+import javax.persistence.Transient;
 
 import com.ufcg.psoft.mercadofacil.enums.MetodoPagamento;
+import com.ufcg.psoft.mercadofacil.interfaces.InterfaceMetodoPagamento;
+import com.ufcg.psoft.mercadofacil.utils.MetodoPagamentoUtils;
 
 @Embeddable
 public class InfoPagamento {
 	
-	private MetodoPagamento metodoPagamento;
+	@Column(name = "metodo_pagamento")
+	private MetodoPagamento metodoPagamentoEnum;
+	
+	@Transient
+	private InterfaceMetodoPagamento metodoPagamento;
 	
 	public InfoPagamento() {}
-
-	public MetodoPagamento getMetodoPagamento() {
-		return metodoPagamento;
+	
+	public InfoPagamento(MetodoPagamento metodoPagamento) {
+		this.metodoPagamentoEnum = metodoPagamento;
+	}
+	
+	// Métodos para persistir enums e converter enum em Classe Strategy novamente
+	
+	@PostLoad
+	@PostPersist
+	@PostUpdate
+	void fillMetodoPagamentoTransient() {
+		this.metodoPagamento = MetodoPagamentoUtils.getMetodoPagamentoByEnum(this.metodoPagamentoEnum);
+	}
+	
+	public InterfaceMetodoPagamento getMetodoPagamento() {
+		return this.metodoPagamento;
 	}
 
-	public void setMetodoPagamento(MetodoPagamento metodoPagamento) {
+	public void setMetodoPagamento(InterfaceMetodoPagamento metodoPagamento) {
 		this.metodoPagamento = metodoPagamento;
+	}
+
+	public MetodoPagamento getMetodoPagamentoEnum() {
+		return metodoPagamentoEnum;
+	}
+
+	public void setMetodoPagamentoEnum(MetodoPagamento metodoPagamentoEnum) {
+		this.metodoPagamentoEnum = metodoPagamentoEnum;
 	}
 
 	@Override

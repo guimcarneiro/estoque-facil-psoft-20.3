@@ -8,6 +8,8 @@ public class CompraDetalhesDTO {
 
 	private Long id;
 	
+	private Long usuarioId;
+	
 	private List<ProdutoCarrinhoDTO> produtos;
 	
 	private BigDecimal valorTotal;
@@ -22,11 +24,13 @@ public class CompraDetalhesDTO {
 			List<ProdutoCarrinhoDTO> produtos,
 			BigDecimal valorTotal,
 			LocalDateTime dataCriacao,
-			InfoPagamentoDetalhesDTO infoPagamentoDetalhesDTO) {
+			InfoPagamentoDetalhesDTO infoPagamentoDetalhesDTO,
+			Long usuarioId) {
 		this.produtos = produtos;
 		this.valorTotal = valorTotal;
 		this.dataCriacao = dataCriacao;
 		this.pagamento = infoPagamentoDetalhesDTO;
+		this.usuarioId = usuarioId;
 	}
 	
 	public CompraDetalhesDTO(
@@ -34,12 +38,14 @@ public class CompraDetalhesDTO {
 			List<ProdutoCarrinhoDTO> produtos,
 			BigDecimal valorTotal,
 			LocalDateTime dataCriacao,
-			InfoPagamentoDetalhesDTO infoPagamentoDetalhesDTO) {
+			InfoPagamentoDetalhesDTO infoPagamentoDetalhesDTO,
+			Long usuarioId) {
 		this.id = id;
 		this.produtos = produtos;
 		this.valorTotal = valorTotal;
 		this.dataCriacao = dataCriacao;
 		this.pagamento = infoPagamentoDetalhesDTO;
+		this.usuarioId = usuarioId;
 	}
 
 	public List<ProdutoCarrinhoDTO> getProdutos() {
@@ -80,6 +86,14 @@ public class CompraDetalhesDTO {
 
 	public void setPagamento(InfoPagamentoDetalhesDTO pagamento) {
 		this.pagamento = pagamento;
+	}
+
+	public Long getUsuarioId() {
+		return usuarioId;
+	}
+
+	public void setUsuarioId(Long usuarioId) {
+		this.usuarioId = usuarioId;
 	}
 	
 }

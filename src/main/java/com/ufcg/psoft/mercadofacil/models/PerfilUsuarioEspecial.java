@@ -10,7 +10,7 @@ import com.ufcg.psoft.mercadofacil.utils.CarrinhoUtils;
 public class PerfilUsuarioEspecial implements InterfacePerfilUsuario {
 
 	private final PerfilUsuarioEnum perfil = PerfilUsuarioEnum.ESPECIAL;
-	private final BigDecimal DESCONTO_PERFIL_ESPECIAL = new BigDecimal(1.1);
+	private final BigDecimal DESCONTO_PERFIL_ESPECIAL = new BigDecimal(0.9);
 	private final int NUMERO_DE_ITENS_MINIMO_PARA_APLICAR_DESCONTO = 10;
 	
 	@Override

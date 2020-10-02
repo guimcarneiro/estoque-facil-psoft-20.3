@@ -14,8 +14,10 @@ public class PerfilUsuarioUtils {
 				return new PerfilUsuarioEspecial();
 			case PREMIUM:
 				return new PerfilUsuarioPremium();
-			default:
+			case NORMAL:
 				return new PerfilUsuarioNormal();
+			default:
+				return null;
 		}
 	}
 	

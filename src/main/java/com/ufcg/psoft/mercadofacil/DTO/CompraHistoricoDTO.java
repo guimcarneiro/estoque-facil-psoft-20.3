@@ -8,6 +8,8 @@ public class CompraHistoricoDTO {
 	
 	private Long id;
 	
+	private Long usuarioId;
+	
 	private List<ProdutoCarrinhoDTO> produtos;
 	
 	private BigDecimal valorTotal;
@@ -19,21 +21,33 @@ public class CompraHistoricoDTO {
 	public CompraHistoricoDTO(
 			List<ProdutoCarrinhoDTO> produtos,
 			BigDecimal valorTotal,
-			LocalDateTime dataCriacao) {
+			LocalDateTime dataCriacao,
+			Long usuarioId) {
 		this.produtos = produtos;
 		this.valorTotal = valorTotal;
 		this.dataCriacao = dataCriacao;
+		this.usuarioId = usuarioId;
 	}
 	
 	public CompraHistoricoDTO(
 			Long id,
 			List<ProdutoCarrinhoDTO> produtos,
 			BigDecimal valorTotal,
-			LocalDateTime dataCriacao) {
+			LocalDateTime dataCriacao,
+			Long usuarioId) {
 		this.id = id;
 		this.produtos = produtos;
 		this.valorTotal = valorTotal;
 		this.dataCriacao = dataCriacao;
+		this.usuarioId = usuarioId;
+	}
+	
+	public Long getUsuarioId() {
+		return usuarioId;
+	}
+
+	public void setUsuarioId(Long usuarioId) {
+		this.usuarioId = usuarioId;
 	}
 
 	public List<ProdutoCarrinhoDTO> getProdutos() {

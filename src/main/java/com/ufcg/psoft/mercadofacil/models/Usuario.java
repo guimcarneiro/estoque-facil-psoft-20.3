@@ -2,9 +2,11 @@ package com.ufcg.psoft.mercadofacil.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
@@ -16,6 +18,9 @@ import com.ufcg.psoft.mercadofacil.utils.PerfilUsuarioUtils;
 public class Usuario {
 
 	@Id
+	@GeneratedValue
+	private Long id;
+	
 	private String cpf;
 	
 	private String nome;
@@ -34,6 +39,7 @@ public class Usuario {
 	
 	@PostLoad
 	@PostPersist
+	@PostUpdate
 	void fillPerfilTransient() {
 		this.perfil = PerfilUsuarioUtils.getPerfilUsuarioByEnum(this.perfilEnum);
 	}
@@ -43,6 +49,10 @@ public class Usuario {
 		this.perfilEnum = PerfilUsuarioEnum.NORMAL;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
 	public String getNome() {
 		return nome;
 	}

@@ -2,7 +2,7 @@ package com.ufcg.psoft.mercadofacil.DTO;
 
 import com.ufcg.psoft.mercadofacil.enums.PerfilUsuarioEnum;
 
-public class UsuarioDTO {
+public class EditaUsuarioViaAdminDTO {
 	
 	private Long id;
 	
