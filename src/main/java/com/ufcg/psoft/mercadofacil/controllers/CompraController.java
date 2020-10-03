@@ -23,9 +23,9 @@ public class CompraController {
 		return this.compraService.listaHistoricoCompras();
 	}
 	
-	@GetMapping("/{produtoId}")
-	public ResponseEntity<?> buscaCompraPorId(@PathVariable Long produtoId){
-		return this.compraService.buscaCompraPorId(produtoId);
+	@GetMapping("/{compraId}")
+	public ResponseEntity<?> buscaCompraPorId(@PathVariable Long compraId){
+		return this.compraService.buscaCompraPorId(compraId);
 	}
 	
 }

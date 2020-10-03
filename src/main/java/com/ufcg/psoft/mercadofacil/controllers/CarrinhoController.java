@@ -3,9 +3,9 @@ package com.ufcg.psoft.mercadofacil.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,12 +36,12 @@ public class CarrinhoController {
 		return this.carrinhoDeComprasService.listarProdutosCarrinhoDTO();
 	}
 	
-	@PutMapping(value = "/limpar")
+	@DeleteMapping
 	public ResponseEntity<?> esvaziarCarrinho() {
 		return this.carrinhoDeComprasService.esvaziarCarrinho();
 	}
 	
-	@PostMapping(value = "/compra")
+	@PutMapping
 	public ResponseEntity<?> finalizarCompra(
 			@RequestBody FinalizacaoCompraDTO finalizacaoCompraDTO) {
 		ResponseEntity<?> resposta = this.compraService.finalizarCompra(
