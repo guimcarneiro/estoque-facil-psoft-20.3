@@ -1,4 +1,4 @@
-package com.ufcg.psoft.mercadofacil.model;
+package com.ufcg.psoft.mercadofacil.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,15 +15,18 @@ public class Lote {
 	@OneToOne
     private Produto produto;
     private int numeroDeItens;
-
+    
+    private String dataDeValidade;
+    
     public Lote() {
         this.id = 0;
     }
 
-    public Lote(Produto produto, int numeroDeItens) {
+    public Lote(Produto produto, int numeroDeItens, String dataDeValidade) {
         super();
         this.produto = produto;
         this.numeroDeItens = numeroDeItens;
+        this.dataDeValidade = dataDeValidade;
     }
 
     public Lote(long id, Produto produto, int numeroDeItens) {
@@ -55,8 +58,16 @@ public class Lote {
     public void setNumeroDeItens(int numeroDeItens) {
         this.numeroDeItens = numeroDeItens;
     }
+    
+    public String getDataDeValidade() {
+		return dataDeValidade;
+	}
 
-    @Override
+	public void setDataDeValidade(String dataDeValidade) {
+		this.dataDeValidade = dataDeValidade;
+	}
+
+	@Override
     public String toString() {
         return "Lote{" +
                 "id=" + id +

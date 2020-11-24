@@ -1,4 +1,4 @@
-package com.ufcg.psoft.mercadofacil.controller;
+package com.ufcg.psoft.mercadofacil.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ufcg.psoft.mercadofacil.DTO.LoteDTO;
-import com.ufcg.psoft.mercadofacil.model.Lote;
-import com.ufcg.psoft.mercadofacil.model.Produto;
+import com.ufcg.psoft.mercadofacil.models.Lote;
+import com.ufcg.psoft.mercadofacil.models.Produto;
 import com.ufcg.psoft.mercadofacil.repositories.LoteRepository;
 import com.ufcg.psoft.mercadofacil.repositories.ProdutoRepository;
-import com.ufcg.psoft.mercadofacil.util.CustomErrorType;
+import com.ufcg.psoft.mercadofacil.services.CarrinhoDeComprasService;
+import com.ufcg.psoft.mercadofacil.services.CompraService;
+import com.ufcg.psoft.mercadofacil.utils.CustomErrorType;
 
 import exceptions.ObjetoInvalidoException;
 
 @RestController
-@RequestMapping("/api")
 @CrossOrigin
 public class RestApiController {
 
@@ -34,7 +35,7 @@ public class RestApiController {
 	
 	@Autowired
 	private LoteRepository loteRepository;
-		
+	
 	@RequestMapping(value = "/produtos", method = RequestMethod.GET)
 	public ResponseEntity<?> listarProdutos() {
 		List<Produto> produtos = new ArrayList<>();
@@ -48,7 +49,7 @@ public class RestApiController {
 		return new ResponseEntity<List<Produto>>(produtos, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/produto/", method = RequestMethod.POST)
+	@RequestMapping(value = "/produto", method = RequestMethod.POST)
 	public ResponseEntity<?> criarProduto(@RequestBody Produto produto, UriComponentsBuilder ucBuilder) {
 
 		List<Produto> produtos = produtoRepository.findByCodigoBarra(produto.getCodigoBarra());
@@ -99,6 +100,7 @@ public class RestApiController {
 		
 		currentProduto.setNome(produto.getNome());
 		currentProduto.setPreco(produto.getPreco());
+		currentProduto.setDescricao(produto.getDescricao());
 		currentProduto.setCodigoBarra(produto.getCodigoBarra());
 		currentProduto.mudaFabricante(produto.getFabricante());
 		currentProduto.mudaCategoria(produto.getCategoria());
@@ -134,7 +136,7 @@ public class RestApiController {
 		}
 		
 		Produto product = optionalProduto.get();
-		Lote lote = new Lote(product, loteDTO.getNumeroDeItens());
+		Lote lote = new Lote(product, loteDTO.getNumeroDeItens(), loteDTO.getDataDeValidade());
 		
 		loteRepository.save(lote);
 		
@@ -165,5 +167,5 @@ public class RestApiController {
 		
 		return new ResponseEntity<List<Lote>>(lotes, HttpStatus.OK);
 	}
-
+	
 }
